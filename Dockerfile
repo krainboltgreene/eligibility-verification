@@ -1,11 +1,19 @@
-FROM python:3.8
-ENV PYTHONUNBUFFERED 1
+FROM python:3.8.5
+ARG PORT
+ENV PORT ${PORT}
 
-EXPOSE 80
+EXPOSE ${PORT}
 
-WORKDIR /usr/src/cal-itp
+ARG DOCKER_DIR
+WORKDIR ${DOCKER_DIR}
+
+ARG DOCKER_USER
+
+RUN useradd ${DOCKER_USER} && \
+    chown -R ${DOCKER_USER}:${DOCKER_USER} ${DOCKER_DIR}
+
+USER ${DOCKER_USER}
 
 COPY requirements.txt requirements.txt
 
-RUN python -m pip install --upgrade pip && \
-    pip install -r requirements.txt
+RUN pip install -r requirements.txt

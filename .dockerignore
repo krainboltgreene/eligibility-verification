@@ -1,0 +1,15 @@
+.devcontainer.json
+.dockerignore
+.env.sample
+.flake8
+.gitignore
+docker-compose*.yml
+Dockerfile*
+README.md
+*.pyc
+*.pyo
+*.pyd
+
+.git
+.vscode
+__pycache__

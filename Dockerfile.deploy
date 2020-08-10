@@ -1,0 +1,25 @@
+FROM python:3.8.5-slim
+
+EXPOSE ${PORT}
+
+ENV USER calitp
+ENV BASE_DIR /usr/src/cal-itp
+
+WORKDIR ${BASE_DIR}
+
+RUN useradd -m ${USER} && \
+    chown -R ${USER} ${BASE_DIR} && \
+    chown -R ${USER} /home/${USER} && \
+    apt-get update && \
+    apt-get install -y nginx
+
+USER ${USER}
+
+COPY requirements.txt requirements.txt
+
+RUN pip install -r requirements.txt && \
+    pip install gunicorn==20.0.4
+
+COPY . ./
+
+RUN python manage.py collectstatic --no-input

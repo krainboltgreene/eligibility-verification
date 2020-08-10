@@ -5,8 +5,10 @@ services:
     build: .
     image: eligibility_verification_client:latest
     entrypoint: ["bin/entrypoint.sh"]
-    command: manage runserver 0.0.0.0:8000
+    command: manage runserver 0.0.0.0:${PORT}
     environment:
+      - DOCKER_USER
+      - DOCKER_DIR
       - DJANGO_SECRET_KEY
       - DJANGO_DEBUG
       - DJANGO_ADMIN
@@ -17,7 +19,7 @@ services:
       - POSTGRES_HOST
       - POSTGRES_PORT
     ports:
-      - "${DJANGO_LOCAL_PORT}:8000"
+      - "${DJANGO_LOCAL_PORT}:${PORT}"
     volumes:
       - .:/usr/src/cal-itp:cached
 
