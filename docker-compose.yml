@@ -9,6 +9,7 @@ services:
     environment:
       - DJANGO_SECRET_KEY
       - DJANGO_DEBUG
+      - DJANGO_ADMIN
       - DJANGO_TRANSIT_AGENCY
       - POSTGRES_DB
       - POSTGRES_USER
